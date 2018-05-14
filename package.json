@@ -1,0 +1,12 @@
+{
+  "name": "MilkshakeBoi",
+  "version": "0.0.0",
+  "description": "A bot used to help me and my friends",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+  },
+  "dependencies": {
+    "discord.js": "11.3.2"
+   }
+  }

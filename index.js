@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const config = require("Milkshake-boi/config.json");
+const config = require("https://github.com/Unstableknight/Milkshake-boi/blob/master/config.json");
 var bot = new Discord.Client();
 bot.on('ready',() => {
   console.log('Im online!');

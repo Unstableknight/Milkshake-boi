@@ -56,4 +56,4 @@ bot.on("message", function(message) {
   }
 });
 
-bot.login(config.TOKEN)
+bot.login(config.token)

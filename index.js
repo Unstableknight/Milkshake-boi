@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const config = require("./config.json");
+const config = require("Milkshake-boi/config.json");
 var bot = new Discord.Client();
 bot.on('ready',() => {
   console.log('Im online!');

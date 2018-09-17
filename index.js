@@ -31,7 +31,7 @@ bot.on("message", function(message) {
         .addField("test2")
         .addField("test3");
 
-    message.channel.send({embed: embed});
+    message.channel.send(embed);
   } else
   if (message.content.startsWith(config.prefix + 'info')) {
     let embed = new Discord.RichEmbed()
@@ -42,7 +42,7 @@ bot.on("message", function(message) {
         .addField("Author's Discord", "https://discord.gg/PzTZhK")
         .addField("Author's Twitch", "https://www.twitch.tv/milkshake_addict");
 
-    message.channel.send({embed: embed});
+    message.channel.send(embed);
   }
   if (message.content.startsWith(config.prefix + 'servers')) {
     let embed = new Discord.RichEmbed()
@@ -52,7 +52,7 @@ bot.on("message", function(message) {
         .addField("Nates MC Server", "Nateb0b.aternos.me")
         .addField("Mythicals MC server", "MILKSHAKELAND134.MC-DNS.NET");
 
-    message.channel.send({embed: embed});
+    message.channel.send(embed);
   }
 });
 

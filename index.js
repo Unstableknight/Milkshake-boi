@@ -1,6 +1,25 @@
 const Discord = require("discord.js");
 const config = require("./config.json");
+const YTDL = require("ytdl-core")
+
+
 var bot = new Discord.Client();
+
+function play(connection, message) {
+  var server = servers[message.guild.id];
+
+  server.dispatcher = connection.playStream(YTDL(server.queue[0], { filter: "audioonly" }));
+
+  server.queue.shift();
+
+  server.dispatcher.on("end", function () {
+    if (server.queue[0]) play(connection, message);
+    else connection.disconnect();
+  });
+}
+
+var servers = {};
+
 bot.on('ready', () => {
   console.log('Im online!');
 });
@@ -47,6 +66,41 @@ bot.on("message", function (message) {
 
       message.channel.send(embed2);
       break;
+    case "play":
+      if (!args[1]) {
+        message.channel.sendMessage("Error: Please Provide a link")
+        return;
+      }
+      if (!message.member.voiceChannel) {
+        message.channel.sendMessage("Error: You must be in a voice channel")
+        return;
+      }
+
+      if(!servers[message.guild.id]) servers[message.guild.id] = {
+        queue: []
+      };
+
+      var servers = servers[message.guild.id];
+
+      server.queue.push(args[1]);
+
+      if (!message.guild.voiceConnection) message.member.voiceChannel.join().then(function (connection) {
+        play(connection, message);
+      });
+      break;
+    case "skip":
+      var server = servers[message.guild.id];
+
+
+      if (server.dispatcher) server.dispatcher.end();
+      break;
+    case "stop":
+      var server = servers[message.guild.id];
+
+      if (message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
+      break;
+    default:
+      message.channel.send("Error: Invaild Command")
   }
 });
 
